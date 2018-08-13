@@ -1,0 +1,25 @@
+version: '3'
+services:
+  feedback:
+    build: .
+    image: esign_br/mywildfly
+    container_name: "mywildfly"
+    restart: always
+    env_file:
+      - mysql.env
+    ports:
+      - 8080:8080
+    links:
+      - mysql:mysql
+    depends_on:
+      - mysql
+  mysql:
+    image: mysql:8
+    container_name: "mysql"
+    restart: always
+    env_file:
+      - mysql.env
+    volumes:
+      - mysql_data:/var/lib/mysql
+volumes:
+  mysql_data:
