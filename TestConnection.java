@@ -8,8 +8,9 @@ public class TestConnection {
         Connection conn = null;
      
         String driver = "com.mysql.cj.jdbc.Driver";
+        String host   = System.getenv("MYSQL_HOST");
         String db     = System.getenv("MYSQL_DATABASE");
-        String url    = "jdbc:mysql://mysql/" + db;
+        String url    = "jdbc:mysql://" + host + "/" + db;
         String user   = System.getenv("MYSQL_USER");
         String pass   = System.getenv("MYSQL_PASSWORD");
   

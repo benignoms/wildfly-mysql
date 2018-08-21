@@ -151,7 +151,7 @@
                     </security>
                 </datasource>
                 <datasource jndi-name="java:jboss/${env.MYSQL_DATABASE}" pool-name="${env.MYSQL_DATABASE}">
-                    <connection-url>jdbc:mysql://mysql/${env.MYSQL_DATABASE}?serverTimezone=UTC</connection-url>
+                    <connection-url>jdbc:mysql://${env.MYSQL_HOST}/${env.MYSQL_DATABASE}?serverTimezone=UTC</connection-url>
                     <driver>mysql</driver>
                     <security>
                         <user-name>${env.MYSQL_USER}</user-name>
