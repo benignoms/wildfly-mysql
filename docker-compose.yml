@@ -4,7 +4,6 @@ services:
     build: .
     image: esignbr/wildfly-mysql
     container_name: wildfly
-    restart: always
     env_file:
       - mysql.env
     ports:
@@ -14,10 +13,5 @@ services:
   mysql:
     image: mysql:8
     container_name: mysql
-    restart: always
     env_file:
       - mysql.env
-    volumes:
-      - mysql_data:/var/lib/mysql
-volumes:
-  mysql_data:
