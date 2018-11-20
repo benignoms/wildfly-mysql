@@ -26,7 +26,7 @@ If you are using this image together with the [official MySQL image](https://hub
 
 ## Wildfly datasource
 
-The image is also built with a pre-configured datasource, defined in the file [standalone.xml](standalone.xml). As can be seen in the xml below, the configuration depends on the environment variables.
+The image is also built with a pre-configured datasource, defined in the file [standalone.xml](standalone.xml). As can be seen in the *xml* below, the configuration depends on the environment variables.
 
 ```xml
 <datasource jndi-name="java:jboss/${env.MYSQL_DATABASE}" pool-name="${env.MYSQL_DATABASE}">
@@ -43,7 +43,7 @@ The image is also built with a pre-configured datasource, defined in the file [s
 </datasource>
 ```
 
-Notice that both **jndi-name** and **pool-name** depend on the name of the database, defined in *MYSQL_DATABASE*. You must take it into consideration for JNDI bindings within your application code.
+> Notice that both **jndi-name** and **pool-name** depend on the name of the database, defined in *MYSQL_DATABASE*. You must take it into consideration for JNDI bindings within your application code.
 
 ## Extending this image
 
@@ -55,9 +55,13 @@ FROM esignbr/wildfly-mysql
 ADD target/application.war /opt/jboss/wildfly/standalone/deployments/
 ```
 
+> I'm assuming you've used [Maven](https://maven.apache.org) to build your application, thus the *war* file is in the *target* folder. Wildfly expects the packaged application file inside */opt/jboss/wildfly/standalone/deployments/*, for automaticaly deploying it on boot.
+
 You can then build your own application Docker image:
 
 `docker build -t myimages/myapplication .`
+
+### Running your own image
 
 Don't forget to define appropriately the environment variables during the image initialization. If your environment is whole Docker, all of your services run in containers, you can use a docker-compose.yml like the example:
 
@@ -84,3 +88,7 @@ services:
       - MYSQL_USER=dbuser
       - MYSQL_PASSWORD=dbpass
 ```
+
+You can then run your application and MySQL together:
+
+`docker-compose up -d`
