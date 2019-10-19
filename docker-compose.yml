@@ -6,7 +6,7 @@ services:
     image: esignbr/wildfly-mysql
     container_name: wildfly
     env_file:
-      - mysql.env
+      - .env
     ports:
       - 8080:8080
     depends_on:
@@ -17,9 +17,9 @@ services:
     image: mysql:8
     container_name: mysql
     env_file:
-      - mysql.env
+      - .env
     healthcheck:
-      test: mysql -u mysqldb -pmysqldb  -e 'use mysqldb;'
+      test: mysql -u ${MYSQL_USER} -p${MYSQL_PASSWORD}  -e 'use ${MYSQL_DATABASE};'
       interval: 10s
       timeout: 5s
       retries: 5
