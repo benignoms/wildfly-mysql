@@ -1,6 +1,7 @@
-version: '3'
+version: "2.4"
 services:
-  feedback:
+
+  wildfly:
     build: .
     image: esignbr/wildfly-mysql
     container_name: wildfly
@@ -9,9 +10,16 @@ services:
     ports:
       - 8080:8080
     depends_on:
-      - mysql
+      mysql:
+        condition: service_healthy
+
   mysql:
     image: mysql:8
     container_name: mysql
     env_file:
       - mysql.env
+    healthcheck:
+      test: mysql -u mysqldb -pmysqldb  -e 'use mysqldb;'
+      interval: 10s
+      timeout: 5s
+      retries: 5
